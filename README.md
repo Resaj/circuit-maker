@@ -14,11 +14,11 @@ Hay que tener en cuenta que para llamar a una función desde "circuito_maker.m",
 Una vez establecidos los parámetros del circuito y modificada la llamada de la función en "circuit_maker.m", sólo queda comprobar que se ejecuta correctamente. Para no perder tiempo de ejecución si saliese mal el circuito, se comprueba antes que el trazado central ha sido especificado correctamente y que el trazado límite no se sale de la lona (las esquinas de la lona quedan marcadas con puntos en las gráficas). Esto se realiza dando el valor "1" a las variables "representar_trazado_central" y "representar_trazado_limite" al principio de "circuit_maker.m".
 
 <p align="center">
-<img src="images/Trazado central.png" width="300" align = "center">
+<img src="images/Trazado central.png" width="600" align = "center">
 </p>
 
 <p align="center">
-<img src="images/Trazado limite.png" width="300" align = "center">
+<img src="images/Trazado limite.png" width="600" align = "center">
 </p>
 
 Cuando se haya comprobado la simulación gráfica del circuito, puede volver a darse el valor "0" a las variables mencionadas anteriormente para no ejecutar más las gráficas.
@@ -26,7 +26,7 @@ Cuando se haya comprobado la simulación gráfica del circuito, puede volver a d
 Ahora queda generar el circuito y mostrarlo, lo cual se hace habilitando a "1" las variables "generar_circuito" y "mostrar_circuito".
 
 <p align="center">
-<img src="images/circuito.bmp" width="300" align = "center">
+<img src="images/circuito.bmp" width="600" align = "center">
 </p>
 
 Por defecto, la línea de meta será la primera recta especificada en la tabla de parámetros de la función del circuito, y el primer robot saldrá siempre desde la parte interior del circuito. Salvo algunos detalles como los que acabo de mencionar, la mayoría de las distancias y colores empleados son parametrizables para facilitar su modificación.
