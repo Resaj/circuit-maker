@@ -33,10 +33,10 @@ Por defecto, la línea de meta será la primera recta especificada en la tabla d
 
 La resolución del circuito está por defecto en 2mm/píxel para no demorar demasiado su generación, pero se ha llegado a probar con 0.5mm/píxel en un circuito de 5x2m, obteniendo un bmp de 117MB en aproximadamente 12 minutos de ejecución.
 
-## Author
+## Autor
 [Rubén Espino San José](https://github.com/Resaj)
 
-## License
+## Licencia
 <p align="center">
 <img src="license/by-sa.png" align = "center">
 </p>
