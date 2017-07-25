@@ -14,7 +14,7 @@ time = clock;
 fprintf('\n---------- CIRCUIT MAKER PROGRAM ----------\n');
 fprintf('started at %d:%d:%.1f\n', time(4), time(5), time(6));
 
-mm_pix = 1; % resolución en mm/píxel
+mm_pix = 2; % resolución en mm/píxel
 fondo = [15 155 15]; % color de fondo en RGB
 blanco = [255 255 255];
 negro = [0 0 0];
