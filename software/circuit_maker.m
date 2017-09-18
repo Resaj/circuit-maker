@@ -20,10 +20,12 @@ blanco = [255 255 255];
 negro = [0 0 0];
 rojo = [255 0 0];
 color_piano_1 = rojo;
-color_piano_2 = negro;
-ancho_pista = 2*170; % mm
-ancho_piano = 170/2; % mm
-marcas_salida = 4;
+color_piano_2 = blanco;
+color_exterior_pista = 0.2 * 255;
+color_interior_pista = 0.4 * 255;
+ancho_pista = 400; % mm
+ancho_piano = 60; % mm
+marcas_salida = 2;
 separacion_salida = 500; % mm
 
 representar_trazado_central = 1;
@@ -32,10 +34,10 @@ generar_circuito = 1;
 mostrar_circuito = 1;
 
 %% COORDENADAS DEL CIRCUITO
-%[dim origen tramos] = coord_nascar();
+[dim origen tramos] = coord_nascar();
 %[dim origen tramos] = coord_nascar_inv();
 %[dim origen tramos] = coord_nascar_vert();
-[dim origen tramos] = coord_mgw2015();
+%[dim origen tramos] = coord_mgw2015();
 %[dim origen tramos] = coord_mgw2015_inv();
 
 %% Calcular parámetros de la trayectoria principal
@@ -700,9 +702,9 @@ for i=1:m
             end
 
             if(abs(xd0-xi0)>abs(yd0-yi0))
-                color = (-(x0-(xd0+xi0)/2)*255/((xd0-xi0)/2)+255)*(x0<(xi0+xd0)/2 && xd0<xi0 || x0>=(xi0+xd0)/2 && xd0>xi0) + ((x0-(xd0+xi0)/2)*255/((xd0-xi0)/2)+255)*(x0>=(xi0+xd0)/2 && xd0<xi0 || x0<(xi0+xd0)/2 && xd0>xi0);
+                color = (2*(color_exterior_pista-color_interior_pista)/(xd0-xi0)*(x0-xd0)+color_exterior_pista)*(x0<(xi0+xd0)/2 && xd0<xi0 || x0>=(xi0+xd0)/2 && xd0>xi0) + (2*(color_interior_pista-color_exterior_pista)/(xd0-xi0)*(x0-xi0)+color_exterior_pista)*(x0>=(xi0+xd0)/2 && xd0<xi0 || x0<(xi0+xd0)/2 && xd0>xi0);
             else
-                color = (-(y0-(yd0+yi0)/2)*255/((yd0-yi0)/2)+255)*(y0<(yi0+yd0)/2 && yd0<yi0 || y0>=(yi0+yd0)/2 && yd0>yi0) + ((y0-(yd0+yi0)/2)*255/((yd0-yi0)/2)+255)*(y0>=(yi0+yd0)/2 && yd0<yi0 || y0<(yi0+yd0)/2 && yd0>yi0);
+                color = (2*(color_exterior_pista-color_interior_pista)/(yd0-yi0)*(y0-yd0)+color_exterior_pista)*(y0<(yi0+yd0)/2 && yd0<yi0 || y0>=(yi0+yd0)/2 && yd0>yi0) + (2*(color_interior_pista-color_exterior_pista)/(yd0-yi0)*(y0-yi0)+color_exterior_pista)*(y0>=(yi0+yd0)/2 && yd0<yi0 || y0<(yi0+yd0)/2 && yd0>yi0);
             end
             
             for q=1:size(xunit,2)
@@ -735,7 +737,7 @@ for i=1:m
             xunit = r * cos(th) + xc;
             yunit = r * sin(th) + yc;
 
-            color = (-(r-(rd+ri)/2)*255/((rd-ri)/2)+255)*(r<(ri+rd)/2 && rd<ri || r>=(ri+rd)/2 && rd>ri) + ((r-(rd+ri)/2)*255/((rd-ri)/2)+255)*(r>=(ri+rd)/2 && rd<ri || r<(ri+rd)/2 && rd>ri);
+            color = (2*(color_exterior_pista-color_interior_pista)/(rd-ri)*(r-rd)+color_exterior_pista)*(r<(ri+rd)/2 && rd<ri || r>=(ri+rd)/2 && rd>ri) + (2*(color_interior_pista-color_exterior_pista)/(rd-ri)*(r-ri)+color_exterior_pista)*(r>=(ri+rd)/2 && rd<ri || r<(ri+rd)/2 && rd>ri);
 
             for q=1:size(xunit,2)
                 R(size(circuito,1)-floor(yunit(q)/mm_pix),floor(xunit(q)/mm_pix)) = color;
