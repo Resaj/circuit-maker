@@ -15,19 +15,21 @@ fprintf('\n---------- CIRCUIT MAKER PROGRAM ----------\n');
 fprintf('started at %d:%d:%.1f\n', time(4), time(5), time(6));
 
 %% PARAMETROS DE CONFIGURACION
-mm_pix = 2; % resolucion en mm/pixel
-fondo = [15 155 15]; % color de fondo en RGB
+pix_mm = 0.5; % resolucion en pixeles/mm
+mm_pix = 1/pix_mm;
 blanco = [255 255 255];
 negro = [0 0 0];
 rojo = [255 0 0];
+verde = [15 155 15];
+fondo = verde; % color de fondo en RGB
 color_piano_1 = rojo;
 color_piano_2 = blanco;
-color_exterior_pista = 0.2 * 255;
-color_interior_pista = 0.4 * 255;
-ancho_pista = 400; % mm
-ancho_piano = 60; % mm
-marcas_salida = 2;
-separacion_salida = 500; % mm
+color_exterior_pista = 0.2 * 255; % tonalidad exterior de gris en la pista (0 = negro, 255 = blanco)
+color_interior_pista = 0.4 * 255; % tonalidad interior de gris en la pista (0 = negro, 255 = blanco)
+ancho_pista = 400; % ancho de la carretera en mm
+ancho_piano = 60; % ancho de cada piano en mm
+marcas_salida = 2; % numero de posiciones de salida = numero de robots
+separacion_salida = 500; % separacion entre marcas de salida
 
 representar_trazado_central = 1;
 representar_trazado_limite = 1;
