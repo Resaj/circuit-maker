@@ -15,7 +15,7 @@ fprintf('\n---------- CIRCUIT MAKER PROGRAM ----------\n');
 fprintf('started at %d:%d:%.1f\n', time(4), time(5), time(6));
 
 %% PARAMETROS DE CONFIGURACION
-pix_mm = 0.5; % resolucion en pixeles/mm
+pix_mm = 0.25; % resolucion en pixeles/mm
 mm_pix = 1/pix_mm;
 blanco = [255 255 255];
 negro = [0 0 0];
@@ -31,8 +31,8 @@ ancho_piano = 60; % ancho de cada piano en mm
 marcas_salida = 2; % numero de posiciones de salida = numero de robots
 separacion_salida = 500; % separacion entre marcas de salida
 
-representar_trazado_central = 1;
-representar_trazado_limite = 1;
+representar_trazado_central = 0;
+representar_trazado_limite = 0;
 generar_circuito = 1;
 mostrar_circuito = 1;
 
@@ -792,6 +792,8 @@ for i=1:m
         xdir = tramos(i,3);
         ydir = tramos(i,4);
         modulo = tramos(i,2);
+        modulo_izq = modulo;
+        modulo_der = modulo;
         
         for j=1:lineas
             x0 = ((lineas-j)*xpi0 + (j-1)*xi0)/(lineas-1);
@@ -870,7 +872,9 @@ for i=1:m
         rpd = tramos_der_piano(i,2);
         xc = tramos(i,3);
         yc = tramos(i,4);
-        modulo = pi*tramos(i,2);
+        modulo = abs(tramos(i,2)*tramos(i,1)*pi/180);
+        modulo_izq = abs(tramos_izq(i,2)*tramos_izq(i,1)*pi/180);
+        modulo_der = abs(tramos_der(i,2)*tramos_der(i,1)*pi/180);
         
         if(tramos(i,1)>0)
             ang1 = tramos(i,9);
@@ -880,11 +884,11 @@ for i=1:m
             ang2 = tramos(i,9);
         end
         ang2 = ang2 + 2*pi*(ang1>ang2);
-
+        
         for j=1:lineas
             r = ((lineas-j)*rpi + (j-1)*ri)/(lineas-1);
             
-            th = ang1:pi*mm_pix/2/modulo:ang2;
+            th = ang1:mm_pix/2/modulo:ang2;
             xunit = r * cos(th) + xc;
             yunit = r * sin(th) + yc;
 
@@ -907,7 +911,7 @@ for i=1:m
 
             r = ((lineas-j)*rd + (j-1)*rpd)/(lineas-1);
             
-            th = ang1:pi*mm_pix/2/modulo:ang2;
+            th = ang1:mm_pix/2/modulo:ang2;
             xunit = r * cos(th) + xc;
             yunit = r * sin(th) + yc;
 
@@ -930,8 +934,8 @@ for i=1:m
         end
     end
     
-    dist_anterior_izq = dist_anterior_izq + dist_tramo_actual_izq;
-    dist_anterior_der = dist_anterior_der + dist_tramo_actual_der;
+    dist_anterior_izq = dist_anterior_izq + modulo_izq;
+    dist_anterior_der = dist_anterior_der + modulo_der;
 end
 
 %% Pintar marcas de salida y línea de meta
