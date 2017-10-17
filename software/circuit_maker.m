@@ -24,17 +24,17 @@ verde = [15 155 15];
 fondo = verde; % color de fondo en RGB
 color_piano_1 = rojo;
 color_piano_2 = blanco;
-color_exterior_pista = 0.2 * 255; % tonalidad exterior de gris en la pista (0 = negro, 255 = blanco)
+color_exterior_pista = 0.15 * 255; % tonalidad exterior de gris en la pista (0 = negro, 255 = blanco)
 color_interior_pista = 0.4 * 255; % tonalidad interior de gris en la pista (0 = negro, 255 = blanco)
 ancho_pista = 400; % ancho de la carretera en mm
 ancho_piano = 60; % ancho de cada piano en mm
-marcas_salida = 2; % numero de posiciones de salida = numero de robots
+marcas_salida = 8; % numero de posiciones de salida = numero de robots
 separacion_salida = 500; % separacion entre marcas de salida
 
-representar_trazado_central = 0;
+representar_trazado_central = 1;
 representar_trazado_limite = 0;
-generar_circuito = 1;
-mostrar_circuito = 1;
+generar_circuito = 0;
+mostrar_circuito = 0;
 
 %% COORDENADAS DEL CIRCUITO
 [dim origen tramos] = coord_nascar();
@@ -42,6 +42,7 @@ mostrar_circuito = 1;
 %[dim origen tramos] = coord_nascar_vert();
 %[dim origen tramos] = coord_mgw2015();
 %[dim origen tramos] = coord_mgw2015_inv();
+%[dim origen tramos] = coord_mge2017();
 
 %% Calcular parametros de la trayectoria principal
 [m n] = size(tramos);
@@ -76,7 +77,7 @@ for i=1:m
                 if(alpha~=pi/2 && alpha~=-pi/2)
                     xdir = (abs(alpha)<pi/2) - (abs(alpha)>pi/2);
                     ydir = xdir*tan(alpha);
-                    ydir = ydir * (ydir>1e-10);
+                    ydir = ydir * (abs(ydir)>1e-10);
                 else
                     ydir = (alpha==pi/2) - (alpha==-pi/2);
                     xdir = 0;
@@ -129,7 +130,15 @@ for i=1:m
                         c = corte(1)^2 - (dist^2/(1+(ydir2/xdir2)^2));
                         p = [a b c];
                         raices = roots(p);
-                        xf = raices(1)*(xdir2>0 && (x2-raices(1))<0 || xdir2<0 && (x2-raices(1))>0) + raices(2)*(xdir2>0 && (x2-raices(1))>0 || xdir2<0 && (x2-raices(1))<0);
+
+                        omega = (beta1 - beta2)*(tramos(i+1,1)>0) + (beta2 - beta1)*(tramos(i+1,1)<0);
+                        omega = omega + 2*pi*(omega<0);
+                        if(omega > pi)
+                            xf = min(raices)*(xdir2 < 0) + max(raices)*(xdir2 > 0);
+                        else
+                            xf = max(raices)*(xdir2 < 0) + min(raices)*(xdir2 > 0);
+                        end
+
                         yf = ydir2/xdir2*xf + y2 - ydir2/xdir2*x2;
                     else
                         xf = x2;
@@ -166,20 +175,20 @@ for i=1:m
                 else
                     if(gamma1~=pi/2 && gamma1~=-pi/2)
                         xdir1 = (abs(gamma1)<pi/2) - (abs(gamma1)>pi/2);
-                        ydir1 = xdir1*tan(gamma1) * ((xdir1>=0) - (xdir1<0));
+                        ydir1 = xdir1*tan(gamma1);
                     else
                         ydir1 = (gamma1==pi/2) - (gamma1==-pi/2);
-                        xdir1 = ydir1/tan(gamma1);
+                        xdir1 = 0;
                     end
                     xdir1 = xdir1 * (abs(xdir1)>1e-10);
                     ydir1 = ydir1 * (abs(ydir1)>1e-10);
 
                     if(gamma2~=pi/2 && gamma2~=-pi/2)
                         xdir2 = (abs(gamma2)<pi/2) - (abs(gamma2)>pi/2);
-                        ydir2 = xdir2*tan(gamma2) * ((xdir2>=0) - (xdir2<0));
+                        ydir2 = xdir2*tan(gamma2);
                     else
                         ydir2 = (gamma2==pi/2) - (gamma2==-pi/2);
-                        xdir2 = ydir2/tan(gamma2);
+                        xdir2 = 0;
                     end
                     xdir2 = xdir2 * (abs(xdir2)>1e-10);
                     ydir2 = ydir2 * (abs(ydir2)>1e-10);
@@ -191,8 +200,7 @@ for i=1:m
                         if(xdir1==0)
                             xc = x0;
                             yc = (xc-xf)*ydir2/xdir2 + yf;
-                        end
-                        if(xdir2==0)
+                        else
                             xc = xf;
                             yc = (xc-x0)*ydir1/xdir1 + y0;
                         end
@@ -215,16 +223,14 @@ for i=1:m
                 y0 = tramos(i-1,6);
                 beta0 = atan(origen(4)/origen(3)) + pi*(origen(3)<0);
                 beta0 = beta0 + sum(tramos(1:i-2,1))*pi/180;
-                if(beta0<=-pi)
-                    beta0 = beta0 + 2*pi;
-                end
+                beta0 = beta0 + 2*pi*(beta0<=-pi);
 
                 if(beta0~=pi/2 && beta0~=-pi/2)
                     xdir0 = (abs(beta0)<pi/2) - (abs(beta0)>pi/2);
-                    ydir0 = xdir0*tan(beta0) * ((xdir0>=0) - (xdir0<0));
+                    ydir0 = xdir0*tan(beta0);
                 else
                     ydir0 = (beta0==pi/2) - (beta0==-pi/2);
-                    xdir0 = ydir0/tan(beta0);
+                    xdir0 = 0;
                 end
                 xdir0 = xdir0 * (abs(xdir0)>1e-10);
                 ydir0 = ydir0 * (abs(ydir0)>1e-10);
@@ -239,7 +245,7 @@ for i=1:m
                     beta3 = beta0 + pi/2;
                     if(beta3~=pi/2 && beta3~=-pi/2)
                         xdir3 = (abs(beta3)<pi/2) - (abs(beta3)>pi/2);
-                        ydir3 = xdir3*tan(beta3) * ((xdir3>=0) - (xdir3<0));
+                        ydir3 = xdir3*tan(beta3);
 
                         if(mod(beta3,pi)==0)
                             x1 = x2;
@@ -269,7 +275,15 @@ for i=1:m
                         c = corte(1)^2 - (dist^2/(1+(ydir2/xdir2)^2));
                         p = [a b c];
                         raices = roots(p);
-                        x1 = raices(1)*(xdir2>0 && (x2-raices(1))>0 || xdir2<0 && (x2-raices(1))<0) + raices(2)*(xdir2>0 && (x2-raices(1))<0 || xdir2<0 && (x2-raices(1))>0);
+
+                        omega = (beta2 - beta0)*(tramos(i-1,1)>0) + (beta0 - beta2)*(tramos(i-1,1)<0);
+                        omega = omega + 2*pi*(omega<0);
+                        if(omega > pi)
+                            x1 = max(raices)*(xdir2 < 0) + min(raices)*(xdir2 > 0);
+                        else
+                            x1 = min(raices)*(xdir2 < 0) + max(raices)*(xdir2 > 0);
+                        end
+                        
                         y1 = ydir2/xdir2*x1 + y2 - ydir2/xdir2*x2;
                     else
                         x1 = x2;
@@ -888,7 +902,7 @@ for i=1:m
         for j=1:lineas
             r = ((lineas-j)*rpi + (j-1)*ri)/(lineas-1);
             
-            th = ang1:mm_pix/2/modulo:ang2;
+            th = ang1:mm_pix/4/modulo:ang2;
             xunit = r * cos(th) + xc;
             yunit = r * sin(th) + yc;
 
@@ -911,7 +925,7 @@ for i=1:m
 
             r = ((lineas-j)*rd + (j-1)*rpd)/(lineas-1);
             
-            th = ang1:mm_pix/2/modulo:ang2;
+            th = ang1:mm_pix/4/modulo:ang2;
             xunit = r * cos(th) + xc;
             yunit = r * sin(th) + yc;
 
@@ -1125,4 +1139,4 @@ end
 
 time = clock;
 fprintf('\nfinished at %d:%d:%2.0f\n', time(4), time(5), time(6));
-input('Pulsa enter para finalizar el programa', 's');
+%input('Pulsa enter para finalizar el programa', 's');
