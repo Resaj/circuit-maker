@@ -31,18 +31,18 @@ ancho_piano = 60; % ancho de cada piano en mm
 marcas_salida = 8; % numero de posiciones de salida = numero de robots
 separacion_salida = 500; % separacion entre marcas de salida
 
-representar_trazado_central = 1;
+representar_trazado_central = 0;
 representar_trazado_limite = 0;
-generar_circuito = 0;
-mostrar_circuito = 0;
+generar_circuito = 1;
+mostrar_circuito = 1;
 
 %% COORDENADAS DEL CIRCUITO
-[dim origen tramos] = coord_nascar();
+%[dim origen tramos] = coord_nascar();
 %[dim origen tramos] = coord_nascar_inv();
 %[dim origen tramos] = coord_nascar_vert();
 %[dim origen tramos] = coord_mgw2015();
 %[dim origen tramos] = coord_mgw2015_inv();
-%[dim origen tramos] = coord_mge2017();
+[dim origen tramos] = coord_cosmobot2017();
 
 %% Calcular parametros de la trayectoria principal
 [m n] = size(tramos);
@@ -1139,4 +1139,4 @@ end
 
 time = clock;
 fprintf('\nfinished at %d:%d:%2.0f\n', time(4), time(5), time(6));
-%input('Pulsa enter para finalizar el programa', 's');
+input('Pulsa enter para finalizar el programa', 's');
