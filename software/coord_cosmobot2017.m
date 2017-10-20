@@ -22,15 +22,19 @@ origen_cto = [x0_pos y0_pos x0_dir y0_dir];
         % distancia en mm para recta
         % radio en mm para curva
 
-numero_de_tramos = 6;
+numero_de_tramos = 10;
 tramos_cto = zeros(numero_de_tramos,2);
 
 tramos_cto(1,:) = [0 5000];
-tramos_cto(2,:) = [195 610];
-tramos_cto(3,:) = [0 2264];
-tramos_cto(4,:) = [-30 600];
-tramos_cto(5,:) = [0 0];
-tramos_cto(6,:) = [1 0];
+tramos_cto(2,:) = [190 600];
+tramos_cto(3,:) = [0 2400];
+tramos_cto(4,:) = [-30 570];
+tramos_cto(5,:) = [0 1100];
+tramos_cto(6,:) = [20 570];
+tramos_cto(7,:) = [0 1010];
+tramos_cto(8,:) = [90 570];
+tramos_cto(9,:) = [0 0];
+tramos_cto(10,:) = [1 0];
 % Los últimos dos tramos se dejan con la longitud/radio a 0 y con el ángulo
 % de curva a 1 o -1 para que el programa los calcule de manera óptima para
 % cerrar el circuito.
