@@ -28,7 +28,7 @@ color_exterior_pista = 0.15 * 255; % tonalidad exterior de gris en la pista (0 =
 color_interior_pista = 0.4 * 255; % tonalidad interior de gris en la pista (0 = negro, 255 = blanco)
 ancho_pista = 400; % ancho de la carretera en mm
 ancho_piano = 60; % ancho de cada piano en mm
-marcas_salida = 8; % numero de posiciones de salida = numero de robots
+marcas_salida = 2; % numero de posiciones de salida = numero de robots
 separacion_salida = 500; % separacion entre marcas de salida
 
 representar_trazado_central = 0;
@@ -42,7 +42,8 @@ mostrar_circuito = 1;
 %[dim origen tramos] = coord_nascar_vert();
 %[dim origen tramos] = coord_mgw2015();
 %[dim origen tramos] = coord_mgw2015_inv();
-[dim origen tramos] = coord_cosmobot2017();
+% [dim origen tramos] = coord_cosmobot2017();
+[dim origen tramos] = coord_pruebas2017();
 
 %% Calcular parametros de la trayectoria principal
 [m n] = size(tramos);
