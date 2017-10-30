@@ -31,19 +31,19 @@ ancho_piano = 60; % ancho de cada piano en mm
 marcas_salida = 2; % numero de posiciones de salida = numero de robots
 separacion_salida = 500; % separacion entre marcas de salida
 
-representar_trazado_central = 0;
+representar_trazado_central = 1;
 representar_trazado_limite = 0;
-generar_circuito = 1;
-mostrar_circuito = 1;
+generar_circuito = 0;
+mostrar_circuito = 0;
 
 %% COORDENADAS DEL CIRCUITO
-%[dim origen tramos] = coord_nascar();
+[dim origen tramos] = coord_nascar();
 %[dim origen tramos] = coord_nascar_inv();
 %[dim origen tramos] = coord_nascar_vert();
 %[dim origen tramos] = coord_mgw2015();
 %[dim origen tramos] = coord_mgw2015_inv();
-% [dim origen tramos] = coord_cosmobot2017();
-[dim origen tramos] = coord_pruebas2017();
+%[dim origen tramos] = coord_cosmobot2017();
+%[dim origen tramos] = coord_pruebas2017();
 
 %% Calcular parametros de la trayectoria principal
 [m n] = size(tramos);
@@ -712,11 +712,7 @@ for i=1:m
                 yunit = (xunit-x0)*ydir/xdir + y0;
             else
                 yunit = y0*(y0<yf) + yf*(y0>=yf):max(mm_pix/2,mm_pix/2*(yf-y0)/modulo):yf*(y0<yf) + y0*(y0>=yf);
-                if(x0==xf)
-                    xunit = (yunit-y0)*xdir/ydir + x0;
-                else
-                    xunit = ones(size(yunit))*x0;
-                end
+                xunit = (yunit-y0)*xdir/ydir + x0;
             end
 
             if(abs(xd0-xi0)>abs(yd0-yi0))
