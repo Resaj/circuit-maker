@@ -2,13 +2,13 @@
 
 function [dim_cto origen_cto tramos_cto] = coord_pruebas2017()
 %% Dimensiones del circuito
-X_cto = 3000; % mm
-Y_cto = 1700; % mm
+X_cto = 2840; % mm
+Y_cto = 1600; % mm
 dim_cto = [X_cto Y_cto];
 
 %% Punto y dirección en origen
-x0_pos = 850;
-y0_pos = 360;
+x0_pos = 770;
+y0_pos = 320;
 x0_dir = 1;
 y0_dir = 0;
 origen_cto = [x0_pos y0_pos x0_dir y0_dir];
