@@ -32,9 +32,9 @@ marcas_salida = 2; % numero de posiciones de salida = numero de robots
 separacion_salida = 500; % separacion entre marcas de salida
 
 representar_trazado_central = 1;
-representar_trazado_limite = 0;
-generar_circuito = 0;
-mostrar_circuito = 0;
+representar_trazado_limite = 1;
+generar_circuito = 1;
+mostrar_circuito = 1;
 
 %% COORDENADAS DEL CIRCUITO
 [dim origen tramos] = coord_nascar();
@@ -629,7 +629,7 @@ end
 %% Representar trazado limite del circuito
 if(representar_trazado_limite)
     figure();
-    title('Trazado l�mite');
+    title('Trazado limite');
     hold on
     scatter(0, 0, 'filled');
     scatter(dim(1), 0, 'filled');
