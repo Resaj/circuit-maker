@@ -629,7 +629,7 @@ end
 %% Representar trazado limite del circuito
 if(representar_trazado_limite)
     figure();
-    title('Trazado límite');
+    title('Trazado lï¿½mite');
     hold on
     scatter(0, 0, 'filled');
     scatter(dim(1), 0, 'filled');
@@ -949,7 +949,7 @@ for i=1:m
     dist_anterior_der = dist_anterior_der + modulo_der;
 end
 
-%% Pintar marcas de salida y línea de meta
+%% Pintar marcas de salida y lï¿½nea de meta
 i = 1;
 while (tramos(i,1)~=0)
     i = i+1;
@@ -1135,5 +1135,5 @@ end
 end
 
 time = clock;
-fprintf('\nfinished at %d:%d:%2.0f\n', time(4), time(5), time(6));
-input('Pulsa enter para finalizar el programa', 's');
+%fprintf('\nfinished at %d:%d:%2.0f\n', time(4), time(5), time(6));
+%input('Pulsa enter para finalizar el programa', 's');
