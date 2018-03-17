@@ -33,7 +33,7 @@ Por defecto, la recta de meta será la primera recta especificada en la tabla de
 
 La resolución del circuito está por defecto en 0.25 píxeles/mm para no demorar demasiado su generación, pero se ha llegado a probar con 2 mm/píxel en un circuito de 5x2m, obteniendo un bmp de 117MB en aproximadamente 12 minutos de ejecución.
 
-Si se ejecuta el programa en Octave desde un terminal de Ubuntu en vez de ejecutarlo desde la interfaz gráfica, es aconsejable descomentar las dos últimas lineas de "basic_circuit_maker.m", las cuales obligan a pulsar enter para finalizar el programa. De lo contrario es posible que se cierren todas las gráficas generadas en cuanto termine la ejecución y no puedan visualizarse.
+Si se ejecuta el programa en Octave desde un terminal en vez de ejecutarlo desde la interfaz gráfica, es aconsejable descomentar las dos últimas lineas de "basic_circuit_maker.m", las cuales obligan a pulsar enter para finalizar el programa. De lo contrario es posible que se cierren todas las gráficas generadas en cuanto termine la ejecución y no puedan visualizarse.
 
 ## Autor
 [Rubén Espino San José](https://github.com/Resaj)
