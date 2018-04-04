@@ -44,6 +44,7 @@ mostrar_circuito = 0;
 %[dim origen tramos] = coord_mgw2015_inv();
 %[dim origen tramos] = coord_cosmobot2017();
 %[dim origen tramos] = coord_pruebas2017();
+%[dim origen tramos] = coord_alcaniz();
 
 %% Calcular parametros de la trayectoria principal
 [m n] = size(tramos);
