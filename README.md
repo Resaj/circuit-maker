@@ -1,5 +1,5 @@
 # Generador de circuitos
-Generador de circuitos con degradado para la prueba de carreras de la [LNRC](http://lnrc.es/). Para evolucionar la prueba se ha optado por sustituir las tradicionales líneas de la prueba de velocistas por un degradado que puede seguirse con sensores analógicos y detectar así la tonalidad de su escala de grises.
+Generador de circuitos con degradado para las competiciones de robots de carreras. Supone una evolución de las tradicionales líneas de los circuitos de robots siguelíneas, sustituyéndolas por un degradado que puede seguirse con sensores analógicos y detectar así la tonalidad de su escala de grises.
 
 Este programa ha sido ideado para facilitar la creación de este tipo de circuitos en mapa de bits y evitar invertir horas con programas de diseño gráfico para cada circuito.
 
