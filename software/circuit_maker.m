@@ -1,10 +1,9 @@
 %% --------------------------------------------------------------------
-% Este programa genera el archivo bmp para un circuito de la LNRC con
-% degradado y pianos a partir de las coordenadas significativas del
-% circuito.
+% Este programa genera el archivo bmp para un circuito con degradado y pianos
+% a partir de las coordenadas significativas del circuito.
 
 % Programa desarrollado por Ruben Espino San Jose
-% Equipo Puma Pride de Robotica de Competicion de la LNRC.
+% Equipo Puma Pride de Robotica de Competicion.
 %%
 
 clc

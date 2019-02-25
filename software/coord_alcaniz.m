@@ -1,4 +1,4 @@
-% Coordenadas para el circuito de Alcañiz
+% Coordenadas para el circuito de Alcañiz del Arduino Day de Zaragoza
 
 function [dim_cto origen_cto tramos_cto] = coord_alcaniz()
 %% Dimensiones del circuito

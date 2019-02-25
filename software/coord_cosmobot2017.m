@@ -1,4 +1,4 @@
-% Coordenadas para el circuito MGW 2015
+% Coordenadas para el circuito de Cosmobot 2017
 
 function [dim_cto origen_cto tramos_cto] = coord_cosmobot2017()
 %% Dimensiones del circuito
@@ -6,7 +6,7 @@ X_cto = 7000; % mm
 Y_cto = 2000; % mm
 dim_cto = [X_cto Y_cto];
 
-%% Punto y dirección en origen
+%% Punto y direcciï¿½n en origen
 x0_pos = 1000;
 y0_pos = 400;
 x0_dir = 1;
@@ -16,8 +16,8 @@ origen_cto = [x0_pos y0_pos x0_dir y0_dir];
 %% Trazado [tipo, longitud]
     % tipo:
         % 0 = recta
-        % -ang = ángulo de curva a izquierda en grados
-        % ang = ángulo de curva a derecha en grados
+        % -ang = ï¿½ngulo de curva a izquierda en grados
+        % ang = ï¿½ngulo de curva a derecha en grados
     % longitud:
         % distancia en mm para recta
         % radio en mm para curva
@@ -35,6 +35,6 @@ tramos_cto(7,:) = [0 1010];
 tramos_cto(8,:) = [90 570];
 tramos_cto(9,:) = [0 0];
 tramos_cto(10,:) = [1 0];
-% Los últimos dos tramos se dejan con la longitud/radio a 0 y con el ángulo
-% de curva a 1 o -1 para que el programa los calcule de manera óptima para
+% Los ï¿½ltimos dos tramos se dejan con la longitud/radio a 0 y con el ï¿½ngulo
+% de curva a 1 o -1 para que el programa los calcule de manera ï¿½ptima para
 % cerrar el circuito.
