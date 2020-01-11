@@ -7,8 +7,9 @@
 %%
 
 clc
-clear variables;
-close all;
+clear variables
+close all
+warning ("off", "Octave:divide-by-zero");
 time = clock;
 fprintf('\n---------- CIRCUIT MAKER PROGRAM ----------\n');
 fprintf('started at %d:%d:%.1f\n', time(4), time(5), time(6));
